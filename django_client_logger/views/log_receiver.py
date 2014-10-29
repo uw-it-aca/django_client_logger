@@ -6,9 +6,11 @@ import json
 
 class LogReceiver(RESTDispatch):
     def POST(self, request):
+        session_key = request.session.session_key
         body = request.POST
         try:
-            process_log_message(json.loads(body.get('data')))
+            process_log_message(json.loads(body.get('data')), session_key)
         except Exception as e:
             print e
         return HttpResponse("")
+

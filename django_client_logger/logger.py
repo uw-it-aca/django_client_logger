@@ -1,9 +1,9 @@
 import logging
 
 
-
-def process_log_message(message):
+def process_log_message(message, session_key):
     for entry in message:
+        entry['session_key'] = session_key
         write_log(entry['logger'], entry)
 
 
