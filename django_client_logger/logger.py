@@ -1,9 +1,9 @@
 import logging
-
+import hashlib
 
 def process_log_message(message, session_key):
     for entry in message:
-        entry['session_key'] = session_key
+        entry['session_key'] = hashlib.md5(session_key).hexdigest()
         write_log(entry['logger'], entry)
 
 
