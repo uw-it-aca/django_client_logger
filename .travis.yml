@@ -7,8 +7,8 @@ install: pip install -r requirements.txt
 script:
 - python -m compileall django_client_logger/
 before_deploy:
-- find restclients/ -name \*.pyc -exec rm {} \;
-- echo $TRAVIS_TAG > restclients/VERSION
+- find django_client_logger/ -name \*.pyc -exec rm {} \;
+- echo $TRAVIS_TAG > django_client_logger/VERSION
 deploy:
   provider: pypi
   server: https://testpypi.python.org/pypi
