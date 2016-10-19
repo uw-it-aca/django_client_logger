@@ -1,0 +1,21 @@
+sudo: false
+language: python
+python:
+- '2.7'
+- '2.6'
+install: pip install -r requirements.txt
+script:
+- python -m compileall django_client_logger/
+before_deploy:
+- find restclients/ -name \*.pyc -exec rm {} \;
+- echo $TRAVIS_TAG > restclients/VERSION
+deploy:
+  provider: pypi
+  server: https://testpypi.python.org/pypi
+  user: uw-it-axdd
+  skip_cleanup: true
+  password:
+    secure: R32hce3Qrn31jRQKY4b7Nt8HZTZGa+R5MDe3KxfG5lQw9Ym+wbH4wodV4sZAfc7dM/Popaw00haabLWV7bRgRR0QyNaN7aBkfeVTansVXa+OhZSTVNNbgT0ZLK5QoFjlBWK+pew1zxdVH90kqxpGBiqjnf23lhsm7cBtjY/+qd4=
+  on:
+    tags: true
+    python: '2.7'
