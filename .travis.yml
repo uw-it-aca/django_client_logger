@@ -11,11 +11,11 @@ before_deploy:
 - echo $TRAVIS_TAG > django_client_logger/VERSION
 deploy:
   provider: pypi
-  server: https://testpypi.python.org/pypi
-  user: uw-it-axdd
+  server: https://pypi.python.org/pypi
+  user: uw-it-aca
   skip_cleanup: true
   password:
-    secure: R32hce3Qrn31jRQKY4b7Nt8HZTZGa+R5MDe3KxfG5lQw9Ym+wbH4wodV4sZAfc7dM/Popaw00haabLWV7bRgRR0QyNaN7aBkfeVTansVXa+OhZSTVNNbgT0ZLK5QoFjlBWK+pew1zxdVH90kqxpGBiqjnf23lhsm7cBtjY/+qd4=
+    secure: LXsWo8Gspy803x1nFLRP60xkME5p8NvrtMkq8+V05PDSBdXx0azd937sZyqoWbQ4K1g0sSgS9Nd41eUem+F6JR+skUO1Y3DNGQm8GS0jfDCruOx0/VZHDNhbSTruDTbzr3Cw1zmYjHzS2G7PYyOLSMXW/fULn2AehYCKONxlIXY=
   on:
     tags: true
     python: '2.7'
