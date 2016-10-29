@@ -1,59 +1,39 @@
-#!/usr/bin/env python
-
-
-# Taken from django's setup.py:
-
 import os
-
-packages, package_data = [], {}
-
-def is_package(package_name):
-    return True
-
-def fullsplit(path, result=None):
-    """
-Split a pathname into components (the opposite of os.path.join)
-in a platform-neutral way.
-"""
-    if result is None:
-        result = []
-    head, tail = os.path.split(path)
-    if head == '':
-        return [tail] + result
-    if head == path:
-        return result
-    return fullsplit(head, [tail] + result)
-
-
-
-for dirpath, dirnames, filenames in os.walk("userservice"):
-    # Ignore PEP 3147 cache dirs and those whose names start with '.'
-    dirnames[:] = [d for d in dirnames if not d.startswith('.') and d != '__pycache__']
-    parts = fullsplit(dirpath)
-    package_name = '.'.join(parts)
-    if '__init__.py' in filenames and is_package(package_name):
-        packages.append(package_name)
-    elif filenames:
-        relative_path = []
-        while '.'.join(parts) not in packages:
-            relative_path.append(parts.pop())
-        relative_path.reverse()
-        path = os.path.join(*relative_path)
-        package_files = package_data.setdefault('.'.join(parts), [])
-        package_files.extend([os.path.join(path, f) for f in filenames])
-
 from setuptools import setup
 
+README = """
+See the README on `GitHub
+<https://github.com/uw-it-aca/django_client_logger>`_.
+"""
+
+# The VERSION file is created by travis-ci, based on the tag name
+version_path = 'django_client_logger/VERSION'
+VERSION = open(os.path.join(os.path.dirname(__file__), version_path)).read()
+VERSION = VERSION.replace("\n", "")
+
+# allow setup.py to be run from any path
+os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+
+url = "https://github.com/uw-it-aca/django_client_logger"
 setup(
     name='django_client_logger',
-    version='0.1',
-    packages=[ 'django_client_logger' ],
-    package_data = package_data,
+    version=VERSION,
+    packages=['django_client_logger'],
+    author="UW-IT AXDD",
+    author_email="aca-it@uw.edu",
+    include_package_data=True,
     install_requires=[],
-    license = "Apache 2.0",
-    author = "Stephen De Vight",
-    author_email = "devights@uw.edu",
-    description = "Client logging application for django",
-    keywords = "django client log",
-    url = "https://github.com/devights/django_client_logger"
+    license='Apache License, Version 2.0',
+    description=("Client logging application for django"),
+    long_description=README,
+    url=url,
+    classifiers=[
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
+    ],
 )
+
