@@ -1,6 +1,7 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url
 from django_client_logger.views.log_receiver import LogReceiver
 
-urlpatterns = patterns('',
+
+urlpatterns = [
     url(r'log', LogReceiver().run)
-)
+    ]
