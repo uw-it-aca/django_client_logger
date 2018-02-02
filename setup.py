@@ -22,7 +22,7 @@ setup(
     author="UW-IT AXDD",
     author_email="aca-it@uw.edu",
     include_package_data=True,
-    install_requires=['Django>=1.10.5'],
+    install_requires=['Django>=1.10.5,<2.0'],
     license='Apache License, Version 2.0',
     description=("Client logging application for django"),
     long_description=README,
