@@ -22,7 +22,7 @@ setup(
     author="UW-IT AXDD",
     author_email="aca-it@uw.edu",
     include_package_data=True,
-    install_requires=[],
+    install_requires=['Django>=1.10.5'],
     license='Apache License, Version 2.0',
     description=("Client logging application for django"),
     long_description=README,
@@ -33,7 +33,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.6',
     ],
 )
 
