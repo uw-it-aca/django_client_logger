@@ -2,20 +2,29 @@ sudo: false
 language: python
 python:
 - '2.7'
-- '2.6'
-install: pip install -r requirements.txt
+- '3.6'
+install:
+- pip install -e .
+- pip install pycodestyle
+- pip install coverage
+- pip install python-coveralls
+before_script:
+- cp travis-ci/manage.py manage.py
 script:
+- pycodestyle django_client_logger/
 - python -m compileall django_client_logger/
+- coverage run --source=django_client_logger/ manage.py test django_client_logger
+after_script:
+- coveralls
 before_deploy:
 - find django_client_logger/ -name \*.pyc -exec rm {} \;
 - echo $TRAVIS_TAG > django_client_logger/VERSION
 deploy:
   provider: pypi
-  server: https://pypi.python.org/pypi
   user: uw-it-aca
   skip_cleanup: true
   password:
     secure: LXsWo8Gspy803x1nFLRP60xkME5p8NvrtMkq8+V05PDSBdXx0azd937sZyqoWbQ4K1g0sSgS9Nd41eUem+F6JR+skUO1Y3DNGQm8GS0jfDCruOx0/VZHDNhbSTruDTbzr3Cw1zmYjHzS2G7PYyOLSMXW/fULn2AehYCKONxlIXY=
   on:
     tags: true
-    python: '2.7'
+    python: '3.6'
