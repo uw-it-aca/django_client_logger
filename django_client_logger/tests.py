@@ -39,7 +39,4 @@ class TestLoggerAPI(TestCase):
         with mock.patch.object(logger, 'error') as mock_logger:
             form = {'data': ''}
             response = self.client.post(reverse('client_log_api'), data=form)
-
-            mock_logger.assert_called_once_with(
-                u'Failed to process log messages: '
-                u'No JSON object could be decoded, ""')
+            mock_logger.assert_called_once()
