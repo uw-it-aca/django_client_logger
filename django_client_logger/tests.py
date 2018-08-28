@@ -2,6 +2,7 @@ from django.test import TestCase, RequestFactory
 from django.core.urlresolvers import reverse
 from django.contrib.sessions.middleware import SessionMiddleware
 from django_client_logger.views import LogReceiver
+from django_client_logger.logger import process_log_message
 import logging
 import mock
 
@@ -40,3 +41,18 @@ class TestLoggerAPI(TestCase):
             form = {'data': ''}
             response = self.client.post(reverse('client_log_api'), data=form)
             mock_logger.assert_called_once()
+
+
+class TestLogResponse(TestCase):
+    logger = logging.getLogger('INFO')
+    with mock.patch.object(logger, 'info') as mock_logger:
+        data = [{'logger': "INFO"}]
+        process_log_message(data,
+                            "1234",
+                            "overrideuser",
+                            "originaluser")
+        log_data = {'original_user': 'originaluser',
+                    'logger': 'INFO',
+                    'session_key': '81dc9bdb52d04dc20036dbd8313ed055',
+                    'override_user': 'overrideuser'}
+        mock_logger.assert_called_with(log_data)
