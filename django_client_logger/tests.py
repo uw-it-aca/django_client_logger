@@ -56,4 +56,3 @@ class TestLogResponse(TestCase):
                     'session_key': '81dc9bdb52d04dc20036dbd8313ed055',
                     'override_user': 'overrideuser'}
         mock_logger.assert_called_with(log_data)
-
