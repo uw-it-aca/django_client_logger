@@ -23,9 +23,9 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django>=1.10.5,<2.0',
+        'Django>2.1',
         'mock',
-        'django-userservice>=2.0.2,<3.0',
+        'django-userservice>=3.1',
     ],
     license='Apache License, Version 2.0',
     description=("Client logging application for django"),

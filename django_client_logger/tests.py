@@ -1,5 +1,5 @@
 from django.test import TestCase, RequestFactory
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.sessions.middleware import SessionMiddleware
 from django_client_logger.views import LogReceiver
 from django_client_logger.logger import process_log_message
