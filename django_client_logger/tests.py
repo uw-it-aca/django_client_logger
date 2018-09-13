@@ -1,4 +1,4 @@
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, Client
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.contrib.sessions.middleware import SessionMiddleware
@@ -32,7 +32,13 @@ standard_test_override = override_settings(
 
 @standard_test_override
 class TestLoggerAPI(TestCase):
+
     def setUp(self):
+        self.request = RequestFactory().get("/")
+        self.client = Client()
+        self.request.session = self.client.session
+        self.middleware = UserServiceMiddleware()
+        self.middleware.process_request(self.request)
         session = self.client.session
         session.save()
 
