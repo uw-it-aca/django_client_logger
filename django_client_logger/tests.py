@@ -1,12 +1,36 @@
 from django.test import TestCase, RequestFactory
+from django.test.utils import override_settings
 from django.urls import reverse
 from django.contrib.sessions.middleware import SessionMiddleware
+from userservice.user import UserServiceMiddleware
 from django_client_logger.views import LogReceiver
 from django_client_logger.logger import process_log_message
 import logging
 import mock
 
 
+Session = 'django.contrib.sessions.middleware.SessionMiddleware'
+Common = 'django.middleware.common.CommonMiddleware'
+CsrfView = 'django.middleware.csrf.CsrfViewMiddleware'
+Auth = 'django.contrib.auth.middleware.AuthenticationMiddleware'
+RemoteUser = 'django.contrib.auth.middleware.RemoteUserMiddleware'
+Message = 'django.contrib.messages.middleware.MessageMiddleware'
+XFrame = 'django.middleware.clickjacking.XFrameOptionsMiddleware'
+UserService = 'userservice.user.UserServiceMiddleware'
+AUTH_BACKEND = 'django.contrib.auth.backends.ModelBackend'
+standard_test_override = override_settings(
+    MIDDLEWARE_CLASSES=(Session,
+                        Common,
+                        CsrfView,
+                        Auth,
+                        RemoteUser,
+                        Message,
+                        XFrame,
+                        UserService,),
+    AUTHENTICATION_BACKENDS=(AUTH_BACKEND,))
+
+
+@standard_test_override
 class TestLoggerAPI(TestCase):
     def setUp(self):
         session = self.client.session
