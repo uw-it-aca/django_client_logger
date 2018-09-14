@@ -25,7 +25,7 @@ setup(
     install_requires=[
         'Django>2.1',
         'mock',
-        'django-userservice>=3.1',
+        'django-userservice>=3.1,<4.0',
     ],
     license='Apache License, Version 2.0',
     description=("Client logging application for django"),
@@ -36,7 +36,6 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6',
     ],
 )
