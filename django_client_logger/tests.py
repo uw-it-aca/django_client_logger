@@ -1,4 +1,5 @@
-from django.test import TestCase, RequestFactory, Client
+from django.test import TestCase, Client
+from django.test.client import RequestFactory
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.contrib.sessions.middleware import SessionMiddleware
@@ -9,24 +10,23 @@ import logging
 import mock
 
 
+security = 'django.middleware.security.SecurityMiddleware'
 Session = 'django.contrib.sessions.middleware.SessionMiddleware'
 Common = 'django.middleware.common.CommonMiddleware'
 CsrfView = 'django.middleware.csrf.CsrfViewMiddleware'
 Auth = 'django.contrib.auth.middleware.AuthenticationMiddleware'
-RemoteUser = 'django.contrib.auth.middleware.RemoteUserMiddleware'
 Message = 'django.contrib.messages.middleware.MessageMiddleware'
 XFrame = 'django.middleware.clickjacking.XFrameOptionsMiddleware'
 UserService = 'userservice.user.UserServiceMiddleware'
-AUTH_BACKEND = 'django.contrib.auth.backends.ModelBackend'
+AUTH_BACKEND = 'django.contrib.auth.backends.RemoteUserBackend'
 standard_test_override = override_settings(
-    MIDDLEWARE_CLASSES=(Session,
-                        Common,
-                        CsrfView,
-                        Auth,
-                        RemoteUser,
-                        Message,
-                        XFrame,
-                        UserService,),
+    MIDDLEWARE=[Session,
+                Common,
+                CsrfView,
+                Auth,
+                Message,
+                XFrame,
+                UserService],
     AUTHENTICATION_BACKENDS=(AUTH_BACKEND,))
 
 
@@ -39,8 +39,7 @@ class TestLoggerAPI(TestCase):
         self.request.session = self.client.session
         self.middleware = UserServiceMiddleware()
         self.middleware.process_request(self.request)
-        session = self.client.session
-        session.save()
+        self.client.session.save()
 
     def test_log_api(self):
         logger = logging.getLogger('TEST')
