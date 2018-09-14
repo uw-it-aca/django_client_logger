@@ -20,13 +20,13 @@ XFrame = 'django.middleware.clickjacking.XFrameOptionsMiddleware'
 UserService = 'userservice.user.UserServiceMiddleware'
 AUTH_BACKEND = 'django.contrib.auth.backends.RemoteUserBackend'
 standard_test_override = override_settings(
-    MIDDLEWARE = [Session,
-                  Common,
-                  CsrfView,
-                  Auth,
-                  Message,
-                  XFrame,
-                  UserService],
+    MIDDLEWARE=[Session,
+                Common,
+                CsrfView,
+                Auth,
+                Message,
+                XFrame,
+                UserService],
     AUTHENTICATION_BACKENDS=(AUTH_BACKEND,))
 
 
