@@ -6,7 +6,6 @@ See the README on `GitHub
 <https://github.com/uw-it-aca/django_client_logger>`_.
 """
 
-# The VERSION file is created by travis-ci, based on the tag name
 version_path = 'django_client_logger/VERSION'
 VERSION = open(os.path.join(os.path.dirname(__file__), version_path)).read()
 VERSION = VERSION.replace("\n", "")
@@ -23,9 +22,9 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django>2.1',
+        'Django>=2.1,<3.3',
         'mock',
-        'django-userservice>=3.1,<4.0',
+        'django-userservice~=3.1',
     ],
     license='Apache License, Version 2.0',
     description=("Client logging application for django"),
@@ -39,4 +38,3 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
 )
-
