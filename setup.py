@@ -21,11 +21,11 @@ setup(
     name='django_client_logger',
     version=VERSION,
     packages=['django_client_logger'],
-    author="UW-IT AXDD",
+    author="UW-IT T&LS",
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django~=4.2',
+        'Django>3.2,<5',
         'mock',
         'django-userservice~=3.2',
     ],
@@ -38,6 +38,5 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.8',
     ],
 )
