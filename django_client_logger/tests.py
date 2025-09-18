@@ -65,7 +65,7 @@ class TestLoggerAPI(TestCase):
                 ' "level": "INFO", "message": ""}]')}
 
             response = self.client.post(reverse('client_log_api'), data=form)
-            self.assertEquals(mock_logger.call_count, 3)
+            self.assertEqual(mock_logger.call_count, 3)
 
     def test_log_error(self):
         logger = logging.getLogger('django_client_logger.views')
