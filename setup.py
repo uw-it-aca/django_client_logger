@@ -25,7 +25,7 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django>3.2,<6',
+        'Django',
         'mock',
         'django-userservice',
     ],
