@@ -1,4 +1,4 @@
-# Copyright 2024 UW-IT, University of Washington
+# Copyright 2025 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 import os
@@ -21,13 +21,13 @@ setup(
     name='django_client_logger',
     version=VERSION,
     packages=['django_client_logger'],
-    author="UW-IT T&LS",
+    author="UW-IT SETS",
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'Django>3.2,<5',
+        'Django',
         'mock',
-        'django-userservice~=3.2',
+        'django-userservice',
     ],
     license='Apache License, Version 2.0',
     description=("Client logging application for django"),
